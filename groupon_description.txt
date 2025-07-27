@@ -1,0 +1,64 @@
+Groupon Deal System - Database Project Description
+
+This database models a simplified Groupon-style 
+platform that connects customers with merchants who offer time-limited deals. 
+Customers can browse and purchase deals across various categories such as Food, Health, and Fitness. 
+The system tracks purchases, redemptions, and merchant payments.
+
+Entities & Relationships:
+1. Customer – users who purchase deals.
+2. Merchant – businesses that offer deals.
+3. Deal – promotional offers by merchants.
+4. Category – tags used to classify deals.
+5. Address – normalized address data for merchants.
+6. Purchase – customer purchases of deals.
+7. Deal Category – associative table linking deals to categories.
+8. Redemption – tracks usage of purchased deals.
+9. Payment – tracks payment information linked to purchases.
+
+Customer:
+Represents users who can purchase deals. Each customer can have multiple purchases. 
+Connected to the Purchase table (1:N).
+
+Merchant:
+Represents a business that offers deals on the platform. Each merchant can create multiple deals. 
+Linked to Deal (1:N) and connected to Address via AddressID (1:1).
+
+Address:
+Stores location details for each merchant. Separated to ensure normalization and avoid redundancy.
+ One address belongs to one merchant.
+
+Deal:
+Represents a promotional offer from a merchant. 
+Each deal is connected to one merchant and can belong to multiple categories through Deal Category.
+ Also linked to purchases.
+
+Category:
+Used to group deals by type. Connected to Deal via Deal Category (many-to-many relationship).
+
+Deal Category:
+An associative (join) table that connects Deal and Category in a many-to-many relationship.
+ Each row links one deal to one category.
+
+Purchase:
+Represents a customer's purchase of a specific deal. 
+It connects Customer and Deal in a many-to-many fashion. 
+Also linked to Redemption and Payment (1:1).
+
+Redemption:
+Tracks whether a purchased deal has been used. 
+Each redemption is linked to a specific purchase.
+
+Payment:
+Tracks payment information for a purchase. One payment is linked to one purchase.
+ Connected via PurchaseID.
+
+
+Sample Functionalities (Questions it Can Answer):
+1. Which customers purchased deals priced over 30?
+2. Which merchants offer deals in the Health category?
+3. Which deals were purchased the most?
+4. How many unique customers purchased deals in each city?
+5. Which deals are priced higher than the average deal price?
+6. Which customers purchased deals in the Fitness category?
+7. Which deals are more expensive than the average from the same merchant?
